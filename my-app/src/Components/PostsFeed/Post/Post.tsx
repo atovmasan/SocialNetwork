@@ -1,25 +1,59 @@
-import { CommentOutlined, DislikeOutlined, LikeOutlined } from "@ant-design/icons";
+import {
+  CommentOutlined,
+  DislikeOutlined,
+  LikeOutlined,
+} from "@ant-design/icons";
 import { Space } from "antd";
-import './Post.sass';
+import "./Post.sass";
 import React from "react";
 
 type PropsType = {
-  imgSRC: string
-  text: string
-  isLiked: boolean
-  isDisliked: boolean
-}
+  imgSRC: string;
+  text: string;
+  isLiked: boolean;
+  isDisliked: boolean;
+};
+
+let data = [
+  {
+    imgSRC:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxlcSusDg6_P3x0TrCTvacykYa5Su1dIiTXlj4bWzPmpGW16yaJ01d7cGDBtTm3D1NJ1s&usqp=CAU",
+    text: "blablabebe",
+    isLiked: true,
+    isDisliked: false,
+  },
+
+  {
+    imgSRC:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxlcSusDg6_P3x0TrCTvacykYa5Su1dIiTXlj4bWzPmpGW16yaJ01d7cGDBtTm3D1NJ1s&usqp=CAU",
+    text: "blablabebe",
+    isLiked: true,
+    isDisliked: false,
+  },
+
+  {
+    imgSRC:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxlcSusDg6_P3x0TrCTvacykYa5Su1dIiTXlj4bWzPmpGW16yaJ01d7cGDBtTm3D1NJ1s&usqp=CAU",
+    text: "blablabebe",
+    isLiked: true,
+    isDisliked: false,
+  },
+];
+
+const map1 = data.map((t) => {
+  return (
+    <div className="post">
+      <img src={t.imgSRC} />
+      <p>{t.text}</p>
+      <Space className="Space">
+        <LikeOutlined className="icons" />
+        <DislikeOutlined className="icons" />
+        <CommentOutlined className="icons" />
+      </Space>
+    </div>
+  );
+});
 
 export const Post = () => {
-  return (
-   <div className="post">
-        <img src="https://sun1-97.userapi.com/impg/OgO57w97F5OK5eucqwPMoX2rynNWWZe2bM5CNQ/8AdygHlQdUI.jpg?size=720x720&quality=95&sign=73168b6ec318d8682d0b8069a5706f85&c_uniq_tag=sIJieFD18B-g1tGC9FmIOWqqGjgi_7Bomno3GUGPVZ4&type=album" />
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim magnam in quo porro accusamus? Dolor reiciendis, similique ad minima unde neque, sapiente consequuntur tenetur deleniti magni enim quos cupiditate excepturi.</p>
-        <Space className="Space">
-            <LikeOutlined className="icons"/>
-            <DislikeOutlined className="icons"/>    
-            <CommentOutlined className="icons" />
-        </Space>
-   </div>
- );
+  return <div>{map1}</div>;
 };
