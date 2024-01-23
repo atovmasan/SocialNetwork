@@ -3,10 +3,10 @@ import './App.css';
 import {Main} from './Components/Main/Main.tsx';
 import {Profile} from './Components/Profile/Profile.tsx';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
-import {store} from './Redux/Store.ts';
+import {useSelector} from 'react-redux';
 
 function App() {
-    let st = store.getState
+    let count = useSelector((state) => state.counter.value);
     return (
         <div className="App">
             <BrowserRouter>
@@ -15,6 +15,7 @@ function App() {
                         element={<Main/>}/>
                     <Route path="profile"
                         element={<Profile/>}/>
+                    <p>{count}</p>
                 </Routes>
             </BrowserRouter>
         </div>
