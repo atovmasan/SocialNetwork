@@ -5,7 +5,7 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 import {useSelector} from 'react-redux';
 
 function App() {
-    let count = useSelector((state) => state.counter.value);
+
     return (
         <div className="App">
             <BrowserRouter>
@@ -14,7 +14,7 @@ function App() {
                         element={<Main/>}/>
                     <Route path="profile"
                         element={<Profile/>}/>
-                    <p>{count}</p>
+
                 </Routes>
             </BrowserRouter>
         </div>
