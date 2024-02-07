@@ -3,9 +3,10 @@ import {Main} from './Components/Main/Main.tsx';
 import {Profile} from './Components/Profile/Profile.tsx';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import {useSelector} from 'react-redux';
+import {RootState} from './Redux/Store.ts';
 
 function App() {
-    let count = useSelector((state : any) => store);
+    let count = useSelector((state : RootState) => state.post.value);
     return (
         <div className="App">
             <BrowserRouter>
