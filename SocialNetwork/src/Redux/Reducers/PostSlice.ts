@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
+import type { CaseReducer, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../Store";
 
 interface CounterState {
@@ -20,9 +20,13 @@ const initialState: CounterState = {
 
 export const postSlice = createSlice({
   name: "Post",
-
   initialState,
   reducers: {
+    getData: (data: CounterState) => {
+      console.log(data);
+
+      return { ...data } as any;
+    },
     like: (state) => {
       if (state.Rate != "like") {
         state.LikeCount++;
@@ -35,6 +39,6 @@ export const postSlice = createSlice({
   },
 });
 
-export const { like } = postSlice.actions;
+export const { like, getData } = postSlice.actions;
 
 export default postSlice.reducer;

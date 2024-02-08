@@ -1,23 +1,25 @@
+import { useEffect } from "react";
 import "./App.css";
 import { Main } from "./Components/Main/Main.tsx";
 import { Profile } from "./Components/Profile/Profile.tsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "./Redux/Store.ts";
-import { like } from "./Redux/Reducers/PostSlice.ts";
+import { db, getPosts } from "./Firebase/Initialaze.tsx";
+import { useDispatch } from "react-redux";
+import { getData } from "./Redux/Reducers/PostSlice.ts";
 
 function App() {
   const dispatch = useDispatch();
-  const count = useSelector((state: RootState) => state.post.LikeCount);
-
-  const callback = () => {
-    dispatch(like());
-  };
-
+  useEffect(() => {
+    getPosts(db)
+      .then((data) => {
+        dispatch(getData(data as any));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
   return (
     <div className="App">
-      <button onClick={callback}>Increment</button>
-      <p>{count}</p>
       <BrowserRouter>
         <Routes>
           <Route path="" element={<Main />} />

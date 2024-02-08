@@ -11,6 +11,7 @@ import { RootState } from "../../../Redux/Store";
 export const Post = () => {
   const data = useSelector((state: RootState) => state.post);
   let DataArray = [data];
+  console.log(data);
   const tsx = DataArray.map((n) => {
     return (
       <div>
