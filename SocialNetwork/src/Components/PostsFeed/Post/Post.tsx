@@ -5,55 +5,32 @@ import {
 } from "@ant-design/icons";
 import { Space } from "antd";
 import "./Post.sass";
-import React from "react";
-
-type PropsType = {
-  imgSRC: string;
-  text: string;
-  isLiked: boolean;
-  isDisliked: boolean;
-};
-
-let data = [
-  {
-    imgSRC:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxlcSusDg6_P3x0TrCTvacykYa5Su1dIiTXlj4bWzPmpGW16yaJ01d7cGDBtTm3D1NJ1s&usqp=CAU",
-    text: "blablabebe",
-    isLiked: true,
-    isDisliked: false,
-  },
-
-  {
-    imgSRC:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxlcSusDg6_P3x0TrCTvacykYa5Su1dIiTXlj4bWzPmpGW16yaJ01d7cGDBtTm3D1NJ1s&usqp=CAU",
-    text: "blablabebe",
-    isLiked: true,
-    isDisliked: false,
-  },
-
-  {
-    imgSRC:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxlcSusDg6_P3x0TrCTvacykYa5Su1dIiTXlj4bWzPmpGW16yaJ01d7cGDBtTm3D1NJ1s&usqp=CAU",
-    text: "blablabebe",
-    isLiked: true,
-    isDisliked: false,
-  },
-];
-
-const map1 = data.map((t) => {
-  return (
-    <div className="post">
-      <img src={t.imgSRC} />
-      <p>{t.text}</p>
-      <Space className="Space">
-        <LikeOutlined className="icons" />
-        <DislikeOutlined className="icons" />
-        <CommentOutlined className="icons" />
-      </Space>
-    </div>
-  );
-});
+import { useSelector } from "react-redux";
+import { RootState } from "../../../Redux/Store";
 
 export const Post = () => {
-  return <div>{map1}</div>;
+  const data = useSelector((state: RootState) => state.post);
+  let DataArray = [data];
+  const tsx = DataArray.map((n) => {
+    return (
+      <div>
+        <img
+          src={
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxlcSusDg6_P3x0TrCTvacykYa5Su1dIiTXlj4bWzPmpGW16yaJ01d7cGDBtTm3D1NJ1s&usqp=CAU"
+          }
+        />
+        <p>{n.text}</p>
+        <Space className="Space">
+          <LikeOutlined className="icons" />
+          <DislikeOutlined className="icons" />
+          <CommentOutlined className="icons" />
+        </Space>
+      </div>
+    );
+  });
+  return (
+    <div className="post">
+      <div>{tsx}</div>
+    </div>
+  );
 };
