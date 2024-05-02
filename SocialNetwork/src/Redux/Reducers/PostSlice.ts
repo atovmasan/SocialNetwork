@@ -1,6 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
-import type { CaseReducer, PayloadAction } from "@reduxjs/toolkit";
-import type { RootState } from "../Store";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 interface CounterState {
   text: string;
@@ -23,22 +21,20 @@ export const postSlice = createSlice({
   initialState,
   reducers: {
     getData: (data: CounterState) => {
-      console.log(data);
-
-      return { ...data } as any;
-    },
-    like: (state) => {
-      if (state.Rate != "like") {
-        state.LikeCount++;
-        state.Rate = "like";
-      } else {
-        state.LikeCount--;
-        state.Rate = "none";
-      }
+      console.log(data)
+      data.LikeCount += 1
+      console.log(data)
     },
   },
 });
 
-export const { like, getData } = postSlice.actions;
+
+export const getDataAsync = createAsyncThunk(
+  "getdata",
+
+)
+
+
+export const { getData } = postSlice.actions;
 
 export default postSlice.reducer;
