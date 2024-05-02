@@ -29,10 +29,7 @@ export const postSlice = createSlice({
 });
 
 
-export const getDataAsync = createAsyncThunk(
-  "getdata",
-
-)
+export const getDataAsync = createAsyncThunk()
 
 
 export const { getData } = postSlice.actions;
