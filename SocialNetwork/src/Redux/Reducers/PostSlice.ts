@@ -1,4 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { collection, doc, getDocFromCache, getDocs } from "firebase/firestore";
+import { db } from "../../Firebase/Initialaze";
 
 interface CounterState {
   text: string;
@@ -29,7 +31,21 @@ export const postSlice = createSlice({
 });
 
 
-export const getDataAsync = createAsyncThunk()
+
+
+export const getDataAsync = createAsyncThunk("getData",  
+  async () => {
+    
+const querySnapshot = await getDocs(collection(db, "Posts"));
+querySnapshot.forEach((doc) => {
+  
+  console.log(doc.id, " => ", doc.data());
+}
+)
+ }
+)
+
+
 
 
 export const { getData } = postSlice.actions;
