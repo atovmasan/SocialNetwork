@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { collection, doc, getDocFromCache, getDocs } from "firebase/firestore";
-import { db } from "../../Firebase/Initialaze";
+import { db, getPosts } from "../../Firebase/Initialaze";
 
 interface CounterState {
   text: string;
@@ -10,7 +10,7 @@ interface CounterState {
   Comments: string[];
 }
 
-const initialState: CounterState = {
+let initialState: CounterState = {
   text: "SomeText",
   LikeCount: 0,
   DisLikeCount: 0,
@@ -22,32 +22,29 @@ export const postSlice = createSlice({
   name: "Post",
   initialState,
   reducers: {
-    getData: (data: CounterState) => {
-      console.log(data)
-      data.LikeCount += 1
-      console.log(data)
+    giveLike(state) {
+      console.log(state)
+      state.LikeCount++
+      console.log(state)
     },
+   // getData: (state: any) => {
+     //  console.log(state)
+     // state = getDataAsync()
+     // console.log(state)
+    //}
   },
 });
 
 
 
 
-export const getDataAsync = createAsyncThunk("getData",  
-  async () => {
-    
-const querySnapshot = await getDocs(collection(db, "Posts"));
-querySnapshot.forEach((doc) => {
-  
-  console.log(doc.id, " => ", doc.data());
-}
-)
- }
-)
+export const getDataAsync = createAsyncThunk('getData', async () => {
+  const data = await getPosts();
+  return data
+});
 
 
 
-
-export const { getData } = postSlice.actions;
+export const { giveLike } = postSlice.actions;
 
 export default postSlice.reducer;

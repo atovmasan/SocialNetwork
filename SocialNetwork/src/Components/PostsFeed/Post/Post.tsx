@@ -1,10 +1,13 @@
 import {CommentOutlined, DislikeOutlined, LikeOutlined} from "@ant-design/icons";
 import {Space} from "antd";
 import "./Post.sass";
-import {useSelector} from "react-redux";
-import {RootState} from "../../../Redux/Store";
+import {useDispatch, useSelector} from "react-redux";
+import {AppDispatch, RootState} from "../../../Redux/Store";
+import {giveLike} from "../../../Redux/Reducers/PostSlice";
+import {useEffect} from "react";
 
 export const Post = () => {
+    const dispatch: AppDispatch = useDispatch()
     const data = useSelector((state : RootState) => state.post);
     let DataArray = [data];
     const tsx = DataArray.map((n) => {
@@ -15,7 +18,10 @@ export const Post = () => {
                     n.text
                 }</p>
                 <Space className="Space">
-                    <LikeOutlined className="icons"/>
+                    <LikeOutlined onClick={
+                            dispatch(giveLike())
+                        }
+                        className="icons"/>
                     <DislikeOutlined className="icons"/>
                     <CommentOutlined className="icons"/>
                 </Space>
